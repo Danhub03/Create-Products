@@ -60,7 +60,6 @@ table {
             border: 2px solid #ddd;
             font-size:25px;
             font-family:arial;
-            /* vertical-align:center; */
         }
 
         th {
@@ -78,48 +77,48 @@ table {
     </nav>
     
 
-<!-- Denna block av kod bygger på funktioner till att kunna lägga till produkt via en formulärfält---------------------------->
+<!-- This block of code builds on functions to be able to add product via a form field--------------------------->
     
 <?php
-// Här kopplar det upp mot databasen som jag skapade enligt instruktionerna som jag skrev i indexen.
-// Dessa variabler är definierade för att kunna ansluta till en databas (MySql-databas) då det är servernamnen, användarnamn,
-// lösenord och databasnamn ($dbname).
+// Here it connects to the database that I created according to the instructions that I wrote in the indexes.
+// These variables are defined to be able to connect to a database (MySql database) as they are the server names, usernames,
+// password and database name ($dbname).
 $servername = "localhost";
 $username = "root";
 $password = "";
 $dbname = "crud_app";
 
-// Med hjälp av de definierade variablerna skapar jag här en ny anslutning till den skapade MySQL-databasen. 
+// Using the defined variables, here I create a new connection to the created MySQL database.
 $conn = new mysqli($servername, $username, $password, $dbname);
 
-// Här skickar den ett felmeddelande om anslutningen misslyckas.
+// Here it sends an error message if the connection fails.
 if ($conn->connect_error) {
     die("Anslutning misslyckades: " . $conn->connect_error);
 }
 
-// Här kontrollerar det om HTTP POST-förfrågan har skickats till sidan.
+// Here it checks if the HTTP POST request has been sent to the page.
  if ($_SERVER["REQUEST_METHOD"] == "POST") { 
-    // Dessa variabler är värden som hämtas från formulärfältet. Detta kommer att innehålla värden av de variablerna som är
-    // nämnda under på den nya produkten.
+    // These variables are values ​​retrieved from the form field. This will contain values ​​of those variables that are
+    // mentioned below on the new product.
     $name = $_POST["name"];    
     $description = $_POST["description"];
     $price = $_POST["price"];
     $image = $_FILES["image"]["name"]; 
     $tmpname = $_FILES["image"]["tmp_name"];
 
-    // Här flyttar den uppladdade bilden från det temporära platsen till det slutgiltiga mappen. Koden kommer köras inom den
-    // den här if-satsen om uppladdningen misslyckas.
+    // Here the uploaded image moves from the temporary location to the final folder. The code will run within it
+    // this if statement if the upload fails.
     if (!move_uploaded_file ($tmpname, "../img/$image")) {
         $error = error_get_last();
         echo "Error: " . $error["message"];
     }
      
-    // Här skapas en SQL-förfrågan som lägger till produktinformationen i databastabellen "products." Värden som inkluderas i
-    // produktinformationen är värden som hämtades från formuläret.
+    // This creates an SQL query that adds the product information to the database table "products." Values ​​included in
+    // the product information is the values ​​that were retrieved from the form.
     $sql = "INSERT INTO products (`name`, `description`, `price`, `image`) VALUES ('$name', '$description', '$price', '$image')";
 
-    // Om produkten lyckas läggas till så printar det ut att det lyckades annars kommer det ge fel.
-    if ($conn->query($sql) === TRUE) {
+// If the product is successfully added, it prints out that it was successful, otherwise it will give an error.
+     if ($conn->query($sql) === TRUE) {
         echo "Produkt lades till framgångsrikt";
     } else {
         echo "Fel: " . $sql . "<br>" . $conn->error;
@@ -150,23 +149,23 @@ $conn->close();
     </form>
 
   
-<!-- Lägga till produkt delen slutar här-------------------------------------------------------------------------------------->
-
-<!-- Denna block av kod bygger på funktioner som visar alla produkter man har lagt till från formulärfältet------------------->
-
+<!-- Add product part ends here-------------------------------------------------------------------------------------->
+    
+<!-- This block of code builds on functions that display all the products one has added from the form field------------------->
+    
     <?php
-    // Här kopplar det upp mot databasen som jag skapade enligt instruktionerna som jag skrev i indexen.
-    // Dessa variabler är definierade för att kunna ansluta till en databas (MySql-databas) då det är servernamnen, användarnamn,
-    // lösenord och databasnamn ($dbname).
+    // Here it connects to the database that I created according to the instructions that I wrote in the indexes.
+    // These variables are defined to be able to connect to a database (MySql database) as they are the server names, usernames,
+    // password and database name ($dbname).
     $servername = "localhost";
     $username = "root";
     $password = "";
     $dbname = "crud_app";
 
-    // Med hjälp av de definierade variablerna skapar jag här en ny anslutning till den skapade MySQL-databasen.
+    // Using the defined variables, here I create a new connection to the created MySQL database.
     $conn = new mysqli($servername, $username, $password, $dbname);
 
-    // Här skickar den ett felmeddelande om anslutningen misslyckas.
+    // Here it sends an error message if the connection fails.
     if ($conn->connect_error) {
         die("Anslutning misslyckades: " . $conn->connect_error);
     }
@@ -174,9 +173,9 @@ $conn->close();
     $sql = "SELECT * FROM products";
     $result = $conn->query($sql);
 
-    // Här är det en if- och en else-statement med while loop vilket här bygger den en tabell som inkluderar en produkt man har
-    // lagt till. Om produkten lyckas läggas till så kommer det visas i en tabell men om den inte lyckas så kommer ingen tabell
-    // visas alls.
+    // Here it is an if and an else statement with a while loop, which here builds a table that includes a product you have
+    // added. If the product is successfully added, it will appear in a table, but if it fails, no table will appear
+    // displayed at all.
     if ($result->num_rows > 0) {
         echo "<h1>Lista över produkter</h1>";
         echo "<table>";
@@ -189,9 +188,9 @@ $conn->close();
             echo "<td>$" . $row["price"] . "</td>";
             echo "<td><img src='../img/" . $row["image"] . "'></td>";
             echo "<td><a href='delete_product.php?id=" . $row["id"] . "'><i class='fa fa-trash-o' style='font-size:48px;color:red'></i>
-            </a></td>"; // Här lägger den till en delete-knapp med iconen trashcan för varje produkt som läggs i tabellen.
-            // Knappen är länkad till en annan php-fil som har inbyggda funktionerna för att kunna ta bort en produkten. Mer 
-            // förklaring finns i delete_product-filen
+            </a></td>"; // Here it adds a delete button with the trashcan icon for each product added to the table.
+            // The button is linked to another php file that has built-in functions to be able to remove a product. More
+            // explanation is in the delete_product file
             echo "</tr>";
         }
         echo "</table>";
@@ -202,8 +201,7 @@ $conn->close();
     $conn->close();
 ?>
 
-<!-- Visa produkt delen slutar här------------------------------------------------------------------------------------------->
-
+<!-- Show product part ends here----------------------------------------------------------------------------------------------------------- >
 
 </body>
 </html>
