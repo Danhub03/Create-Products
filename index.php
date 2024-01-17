@@ -44,7 +44,6 @@ form textarea {
 table {
             width: 100%;
             border-collapse: collapse;
-            /* margin:auto; */
             background-color:white;
         }
 
@@ -59,7 +58,6 @@ table {
             border: 2px solid #ddd;
             font-size:25px;
             font-family:arial;
-            /* vertical-align:center; */
         }
 
         th {
@@ -69,7 +67,7 @@ table {
 </style>
 </head>
 <body>
-<!-- Här länken till min phpmyadmin: 
+<!-- Here is the link to my phpmyadmin:
 http://localhost/phpmyadmin/index.php?route=/table/structure&db=crud_app&table=products -->
 
     <h1>CRUD App Meny</h1>
@@ -82,20 +80,20 @@ http://localhost/phpmyadmin/index.php?route=/table/structure&db=crud_app&table=p
 </body>
 </html>
 
- <!-- Skapa en databas genom att följa dessa steg:
-    1. Sök i själva browsern "localhost/phpmyadmin".
-    2. Klicka på en av länkarna/knapparna i själva sidan som heter "Bläddra".
-    3. Längst åt vänster så ser man ett nät av olika objekt.
-    4. I ett av näten klicka på det som heter "Ny" vilket där skapar du en ny databas.
-    5. När du är där inne står det databasnamn vilken där döper du namnet av databasen så att du kan senare kunna länka dess
-     namn med dina php filer med koder i som refererar namnet av databasen.
-    6.Efter namnet är döpt klicka på skapa.
-    7. Efter detta ska du skapa en tabell där den vill först att du anger tabelnamn och sen antal kolumner.
-    8. I detta fall döpte jag min tabel för product och eftersom det ska inkludera id, namn, description, price och image så
-    behöver jag skriva 5 kolumner i det här fallet. Efter det klicka på skapa.
-    9. Efter detta så får du en struktur av en tabel som behöver dels fyllas på.
-    10. Där det står namn ska det fyllas på id, namn, description, price och image.
-    11. I första raden där du nämnde id finns det en rubrik som heter A I Kommentarer vilket där i den första raden ska du 
-    skriva din primary key och därefter finns det ett litet checkbox åt vänster av din skrivna primary key som ska markeras.
-    12. Sen längst ner så klickar du på spara.
+ <!-- Create a database by following these steps:
+    1. Search in the browser itself "localhost/phpmyadmin".
+    2. Click on one of the links/buttons in the page itself called "Browse".
+    3. On the far left you see a net of different objects.
+    4. In one of the grids, click on the one called "New", where you create a new database.
+    5. When you are in there, it says database name, which is where you name the database so that you can later link its
+     name with your php files with codes in them that reference the name of the database.
+    6.After the name is named, click on create.
+    7. After this, you should create a table where it first wants you to enter the table name and then the number of columns.
+    8. In this case I named my table product and since it should include id, name, description, price and image so
+    do i need to write 5 columns in this case. After that click create.
+    9. After this, you get a structure of a table that needs to be partly filled out.
+    10. Where it says name, it must be filled in with id, name, description, price and image.
+    11. In the first line where you mentioned id there is a heading called A I Comments which in the first line you should
+    write your primary key and then there is a small checkbox to the left of your written primary key to be marked.
+    12. Then at the bottom, click save.
     -->
