@@ -56,7 +56,6 @@ table {
             border: 2px solid #ddd;
             font-size:25px;
             font-family:arial;
-            /* vertical-align:center; */
         }
 
         th {
@@ -70,21 +69,20 @@ table {
     <form action="add_product.php"><button type="submit">Lägg till produkt</button></form>
     <form action="view_products.php"><button type="submit">Se alla produkter</button></form>
     <form action="edit_product.php"><button type="submit">Ändra pris/bild på produkt</button></form>
-    <!-- <form action="delete_product.php"><button type="submit">Ta bort produkt</button></form> -->
 </nav>
 
 <?php
-// Här kopplar det upp mot databasen som jag skapade enligt instruktionerna som jag skrev i indexen.
-// Dessa variabler är definierade för att kunna ansluta till en databas (MySql-databas) då det är servernamnen, användarnamn,
-// lösenord och databasnamn ($dbname).    $servername = "localhost";
+// Here it connects to the database that I created according to the instructions that I wrote in the indexes.
+// These variables are defined to be able to connect to a database (MySql database) as they are the server names, usernames,
+// password and database name ($dbname). $servername = "localhost";
 $username = "root";
 $password = "";
 $dbname = "crud_app";
 
-// Med hjälp av de definierade variablerna skapar jag här en ny anslutning till den skapade MySQL-databasen. 
+// Using the defined variables, here I create a new connection to the created MySQL database.
 $conn = new mysqli($servername, $username, $password, $dbname);
 
-// Här skickar den ett felmeddelande om anslutningen misslyckas.
+// Here it sends an error message if the connection fails.
 if ($conn->connect_error) {
     die("Anslutning misslyckades: " . $conn->connect_error);
 }
@@ -104,7 +102,7 @@ if ($result->num_rows > 0) {
         echo "<td>$" . $row["price"] . "</td>";
         echo "<td><img src='../img/" . $row["image"] . "'></td>";
         echo "<td><a href='delete_product.php?id=" . $row["id"] . "'><i class='fa fa-trash-o' style='font-size:48px;color:red'></i>
-        </a></td>"; // Lägg till Delete-knapp med länk till delete_product.php
+        </a></td>"; // Add Delete button with link to delete_product.php
         echo "</tr>";
     }
     echo "</table>";
